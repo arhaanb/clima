@@ -1,0 +1,28 @@
+footer {
+	text-align: center;
+}
+
+.icon {
+	width: 2em;
+}
+
+.flexy {
+	display: flex;
+}
+
+.card h3, .card h5 {
+	margin: 0;
+}
+
+#grid {
+	display: grid;
+	grid-auto-rows: minmax(125px, auto);
+	grid-gap: 0.5rem;
+}
+
+@media screen and (min-width: 40em) {
+	#grid {
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: 2px;
+	}
+}

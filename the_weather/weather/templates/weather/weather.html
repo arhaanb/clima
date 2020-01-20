@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clima | Dash sir</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+    <script src="https://kit.fontawesome.com/53f1b26a84.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/the_weather/style.css">
+    <link rel="shortcut icon" href="https://i.imgur.com/xPIJijw.png" />
+</head>
+
+<style>
+    .card {
+        border-radius: 30px;
+        background: #eeeeee;
+        box-shadow: 22px 22px 44px #b5b5b5,
+            -22px -22px 44px #ffffff;
+        padding: 1.5em;
+        margin: 1.2em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        margin-top: 0.5em;
+    }
+
+    #grid {
+        display: grid;
+        grid-auto-rows: minmax(125px, auto);
+        grid-gap: 0.5rem;
+    }
+
+    .card {
+        text-align: center;
+    }
+
+    @media screen and (min-width: 40em) {
+        #grid {
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 2px;
+        }
+
+        .card {
+            text-align: left;
+        }
+
+        button {
+            border-radius: 30px;
+            transition: 0.5s;
+            border-style: none;
+        }
+
+        button:hover {
+            background: #eeeeee;
+            box-shadow: 22px 22px 44px #b5b5b5,
+                -22px -22px 44px #ffffff;
+        }
+    }
+
+    footer {
+        text-align: center;
+    }
+
+    .toppart {
+        margin-left: 1.2em;
+        margin-bottom: 3em;
+    }
+
+    .title {
+        margin-top: 0.75em;
+        margin-bottom: 0.5em;
+    }
+
+    #capitalize {
+        text-transform: capitalize;
+    }
+
+    ::selection {
+        background: #afccff;
+        color: #000;
+        padding: .5em;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0.5em;
+    }
+
+    body::-webkit-scrollbar-track {
+        background-color: rgb(255, 255, 255);
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: rgb(177, 177, 177);
+        box-shadow: 22px 22px 44px #b5b5b5,
+            -22px -22px 44px #ffffff;
+        outline: none;
+        border-radius: 25px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="toppart">
+
+            <h1 class="title">Clima</h1>
+
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.name }}
+                <button type="submit">Add City</button>
+            </form>
+        </div>
+    </div>
+
+    <section id="one">
+        <div class="container cool" id="grid">
+            {% for city_weather in weather_data %}
+            <div class="card">
+                <div class="flexy">
+                    <div style="margin-right: 0.8em">
+                        <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" class="icon"></div>
+                    <div>
+                        <h3 id="capitalize">{{ city_weather.city }}</h3>
+                        <h5>{{ city_weather.temperature }}° F</h5>
+                        <h5 id="capitalize">{{ city_weather.description }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <footer>
+        Made with <i class="far fa-heart" style="color: red;"></i> by Arhaan and Hrijul
+    </footer>
+</body>
+
+</html>
